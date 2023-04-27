@@ -1,1 +1,1 @@
-import './photo-main.js'
+import './photo-handler.js'

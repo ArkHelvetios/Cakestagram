@@ -7,11 +7,16 @@ const getRandomNum = (min = 0, max = 100) => {
   return result
 };
 
+const isEscEvent = (evt) => {
+  return evt.key === 'Escape' || evt.key === 'Esc';
+};
+
 const checkMessageLength = (message = '', maxLength = 180) => {
   return message.length <= maxLength;
 }
 
 export {
   getRandomNum,
+  isEscEvent,
   checkMessageLength
 }
