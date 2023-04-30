@@ -1,18 +1,16 @@
-import { photoData } from './photo-data.js';
+import { photoData } from './temporary-data.js';
 
-const bigPhotoWrapper = document.querySelector('.big-picture');
-
-const renderBigPhoto = (thumbnail) => {
-  const photoID = thumbnail.id.match(/[0-9]+/g); // RegExp
+export const renderBigPhoto = (thumbnail, wrapper) => {
+  const photoID = parseInt(thumbnail.id.match(/[0-9]+/g)); // RegExp
   const photo = photoData.find((photo) => photo.id == photoID);
 
   const { url, description, likes, comments } = photo;
-  bigPhotoWrapper.querySelector('.big-picture__img > img').src = url;
-  bigPhotoWrapper.querySelector('.social__caption').textContent = description;
-  bigPhotoWrapper.querySelector('.likes-count').textContent = likes;
-  bigPhotoWrapper.querySelector('.comments-count').textContent = comments.length;
+  wrapper.querySelector('.big-picture__img > img').src = url;
+  wrapper.querySelector('.social__caption').textContent = description;
+  wrapper.querySelector('.likes-count').textContent = likes;
+  wrapper.querySelector('.comments-count').textContent = comments.length;
 
-  const commentsWrapper = bigPhotoWrapper.querySelector('.social__comments');
+  const commentsWrapper = wrapper.querySelector('.social__comments');
   const commentTemplate = commentsWrapper.querySelector('.social__comment');
   const commentFragment = document.createDocumentFragment();
 
@@ -31,5 +29,3 @@ const renderBigPhoto = (thumbnail) => {
 
   commentsWrapper.appendChild(commentFragment);
 }
-
-export { renderBigPhoto }

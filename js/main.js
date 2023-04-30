@@ -1,1 +1,2 @@
-import './photo-handler.js'
+import './photo/thumbnails.js';
+import './upload.js';

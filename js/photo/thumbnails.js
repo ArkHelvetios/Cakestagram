@@ -1,8 +1,11 @@
-import { photoData } from './photo-data.js';
+import { photoData } from './temporary-data.js';
+import { renderBigPhoto } from './render-big-photo.js';
+import { popupHandler } from '../popup-handler.js';
 
 const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const thumbnailsWrapper = document.querySelector('.pictures');
 const thumbnailsWrapperFragment = document.createDocumentFragment();
+const bigPhotoWrapper = document.querySelector('.big-picture');
 
 photoData.forEach(({ id, url, likes, comments }) => {
   const thumbnailElement = thumbnailTemplate.cloneNode(true);
@@ -16,4 +19,16 @@ photoData.forEach(({ id, url, likes, comments }) => {
 
 thumbnailsWrapper.appendChild(thumbnailsWrapperFragment);
 
-export { thumbnailsWrapper };
+thumbnailsWrapper.addEventListener('click', (evt) => {
+  const thumbnail = evt.target.closest('.picture');
+
+  if (thumbnail) {
+    evt.preventDefault;
+    openPhotoPopup(thumbnail)
+  }
+});
+
+const openPhotoPopup = (thumbnail) => {
+  renderBigPhoto(thumbnail, bigPhotoWrapper);
+  popupHandler(bigPhotoWrapper);
+};

@@ -1,4 +1,4 @@
-import { getRandomNum } from './utility.js';
+import { getRandomNum } from '../utility.js';
 
 const OBJECTS_COUNT = 25;
 const LikesRange = { MIN: 14, MAX: 200 };
