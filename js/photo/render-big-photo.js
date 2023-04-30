@@ -1,20 +1,20 @@
 import { photoData } from './temporary-data.js';
 
-export const renderBigPhoto = (thumbnail, wrapper) => {
+const bigPhotoWrapper = document.querySelector('.big-picture');
+const commentsWrapper = bigPhotoWrapper.querySelector('.social__comments');
+const commentTemplate = commentsWrapper.querySelector('.social__comment');
+
+const renderBigPhoto = (thumbnail) => {
   const photoID = parseInt(thumbnail.id.match(/[0-9]+/g)); // RegExp
-  const photo = photoData.find((photo) => photo.id == photoID);
+  const photo = photoData.find((photo) => photo.id === photoID);
 
   const { url, description, likes, comments } = photo;
-  wrapper.querySelector('.big-picture__img > img').src = url;
-  wrapper.querySelector('.social__caption').textContent = description;
-  wrapper.querySelector('.likes-count').textContent = likes;
-  wrapper.querySelector('.comments-count').textContent = comments.length;
+  bigPhotoWrapper.querySelector('.big-picture__img > img').src = url;
+  bigPhotoWrapper.querySelector('.social__caption').textContent = description;
+  bigPhotoWrapper.querySelector('.likes-count').textContent = likes;
+  bigPhotoWrapper.querySelector('.comments-count').textContent = comments.length;
 
-  const commentsWrapper = wrapper.querySelector('.social__comments');
-  const commentTemplate = commentsWrapper.querySelector('.social__comment');
   const commentFragment = document.createDocumentFragment();
-
-  commentsWrapper.innerHTML = '';
 
   photo.comments.forEach(({ id, name, avatar, message }) => {
     const commentElement = commentTemplate.cloneNode(true);
@@ -28,4 +28,14 @@ export const renderBigPhoto = (thumbnail, wrapper) => {
   })
 
   commentsWrapper.appendChild(commentFragment);
+}
+
+const clearBigPhoto = () => {
+  commentsWrapper.innerHTML = '';
+}
+
+export {
+  renderBigPhoto,
+  clearBigPhoto,
+  bigPhotoWrapper
 }

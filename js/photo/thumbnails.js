@@ -1,11 +1,9 @@
 import { photoData } from './temporary-data.js';
-import { renderBigPhoto } from './render-big-photo.js';
-import { popupHandler } from '../popup-handler.js';
+import { openPopup } from './popup-handler.js';
 
 const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const thumbnailsWrapper = document.querySelector('.pictures');
 const thumbnailsWrapperFragment = document.createDocumentFragment();
-const bigPhotoWrapper = document.querySelector('.big-picture');
 
 photoData.forEach(({ id, url, likes, comments }) => {
   const thumbnailElement = thumbnailTemplate.cloneNode(true);
@@ -24,11 +22,6 @@ thumbnailsWrapper.addEventListener('click', (evt) => {
 
   if (thumbnail) {
     evt.preventDefault;
-    openPhotoPopup(thumbnail)
+    openPopup(thumbnail)
   }
 });
-
-const openPhotoPopup = (thumbnail) => {
-  renderBigPhoto(thumbnail, bigPhotoWrapper);
-  popupHandler(bigPhotoWrapper);
-};
