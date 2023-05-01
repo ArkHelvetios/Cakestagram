@@ -1,5 +1,6 @@
 import { isEscEvent } from '../utility.js';
-import { addScaling, removeScaling } from './scale.js';
+import { addScaleHandler, removeScaleHandler } from './scale.js';
+import { addEffectsHandler, removeEffectsHandler } from './effects.js'
 
 const uploadWrapper = document.querySelector('.img-upload__overlay');
 
@@ -11,7 +12,8 @@ const onPopupEscKeydown = (evt) => {
 }
 
 const openPopup = () => {
-  addScaling();
+  addScaleHandler();
+  addEffectsHandler();
 
   uploadWrapper.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -28,7 +30,8 @@ const closePopup = () => {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
 
-  removeScaling();
+  removeScaleHandler();
+  removeEffectsHandler();
 };
 
 export { openPopup }
